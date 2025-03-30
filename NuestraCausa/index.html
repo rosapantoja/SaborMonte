@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra causa - Sabor a monte</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.7.0/css/all.css" crossorigin="anonymous">
+    <!-- AOS CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Fondo de pantalla */
+        body {
+            background-image: url('../background.svg'); /* Reemplaza con la URL de tu imagen */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
+            font-family: 'Arial', sans-serif; /* Mejora la tipografía */
+            color: #333; /* Color del texto */
+        }
+
+        /* Estilo para el contenido */
+        .content {
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+            padding: 40px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+        }
+
+        .list-item {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .list-item strong {
+            color: #1c7d45; /* Color verde para los títulos */
+        }
+
+        /* Estilo para las imágenes */
+        .image-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra para la imagen */
+        }
+
+        /* Títulos */
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1c7d45;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Ajustes para la lista */
+        ul {
+            padding-left: 1.5em;
+        }
+
+        .list-item::before {
+            content: '\f00c'; /* Icono de check (requiere FontAwesome) */
+            font-family: 'Font Awesome 5 Free'; 
+            font-weight: 900;
+            color: #1c7d45; /* Color verde */
+            margin-right: 10px;
+        }
+
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px 15px;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(205, 207, 192);">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Sabor A Monte</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../Menú/index.html">Menú</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../PlatosTemporada/index.html">Platos de temporada</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../InteriorLocal/index.html">Interior del local</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../RepartoDomicilio/index.html">Reparto a domicilio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="../AcercaNosotros/index.html">Acerca de nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Nuestra causa</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <!-- Contenido de "Nuestra causa" -->
+    <div class="content">
+        <h2 data-aos="fade-up">Nuestra causa</h2>
+        <div class="row">
+            <!-- Texto en una columna -->
+            <div class="col-md-6" data-aos="fade-up">
+                <ul>
+                    <li class="list-item"><strong>Sostenibilidad:</strong> Utilizamos productos locales y de temporada, reducimos residuos y apostamos por energías limpias.</li>
+                    <li class="list-item"><strong>Transparencia:</strong> La cocina abierta permite ver como preparamos cada plato, sin secretos.</li>
+                    <li class="list-item"><strong>Cercanía:</strong> Apoyamos a productores de la zona y cuidamos el trato con cada cliente.</li>
+                    <li class="list-item"><strong>Respeto por la naturaleza:</strong> Integramos el huerto y piscigranja para conectar al comensal con el origen del alimento.</li>
+                </ul>
+            </div>
+
+            <!-- Imagen en la otra columna -->
+            <div class="col-md-6 image-container" data-aos="fade-left">
+                <img src="nuestracausa.png" alt="Huerto y piscigranja" class="img-fluid">
+            </div>
+        </div>
+    </div>
+
+    <!-- AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Inicializa AOS
+        AOS.init();
+    </script>
+</body>
+</html>
