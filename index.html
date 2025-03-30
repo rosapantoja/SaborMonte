@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor A Monte</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.7.0/css/all.css" crossorigin="anonymous">
+    <style>
+        /* Fondo de pantalla */
+        body {
+            background-image: url('background1.svg'); /* Reemplaza con la URL de tu imagen */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh; /* Asegura que el fondo cubra toda la altura de la ventana */
+            margin: 0;
+        }
+
+        /* Centrar el contenido horizontal y verticalmente */
+        .full-height {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100%;
+            max-width: 450px;
+            transition: transform 0.3s;
+            filter: invert(100%) brightness(100%);
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        /* Sección izquierda */
+        .section-left {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .section-left p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: white;
+        }
+
+        .section-left p:first-child {
+            font-weight: 600;
+            color: #1c7d45;
+        }
+
+        /* Sección derecha */
+        .section-right {
+            background-color: rgba(255, 255, 255, 0.8); /* Fondo más opaco */
+            padding: 20px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo de la lista */
+        .section-right .list-group-item {
+            padding: 15px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            background-color: #fff;
+            color: #333;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .section-right .list-group-item:hover {
+            background-color: #FF6F61; /* Color de fondo hover */
+            color: #fff;
+        }
+
+        /* Iconos de redes sociales */
+        .social-icons a {
+            font-size: 30px;
+            margin: 0 15px;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: #FF6F61; /* Color de hover */
+        }
+
+        .list-group {
+            padding-left: 0;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 767px) {
+            .section-left p {
+                font-size: 1rem;
+            }
+            .section-right .list-group-item {
+                font-size: 1rem;
+            }
+
+            .logo {
+                max-width: 350px;
+                filter: invert(100%) brightness(0%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid full-height">
+        <div class="row w-100">
+            <!-- Sección izquierda -->
+            <section class="col-12 col-md-6 section-left">
+                <img src="img/logo.png" alt="Logo de la empresa" class="logo">
+                <p class="mt-3">COCINA SOSTENIBLE CON ALMA</p>
+                <p>Huerto propio, leña y sabores de cercanía</p>
+            </section>
+
+            <!-- Sección derecha -->
+            <section class="col-12 col-md-6 section-right">
+                <div class="list-group">
+                    <a href="Menú/index.html" class="list-group-item list-group-item-action">Menú</a>
+                    <a href="PlatosTemporada/index.html" class="list-group-item list-group-item-action">Platos de temporada</a>
+                    <a href="InteriorLocal/index.html" class="list-group-item list-group-item-action">Interior del local</a>
+                    <a href="RepartoDomicilio/index.html" class="list-group-item list-group-item-action">Reparto a domicilio</a>
+                    <a href="AcercaNosotros/index.html" class="list-group-item list-group-item-action">Acerca de nosotros</a>
+                    <a href="NuestraCausa/index.html" class="list-group-item list-group-item-action">Nuestra causa</a>
+                </div>
+
+                <!-- Redes sociales -->
+                <div class="d-flex justify-content-center mt-4 social-icons">
+                    <a href="https://facebook.com" target="_blank" class="text-dark">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="text-dark">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="text-dark">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
