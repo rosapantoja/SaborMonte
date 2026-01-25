@@ -426,6 +426,82 @@
             * { cursor: auto !important; }
             #cursor { display: none; }
         }
+
+        .section-alérgenos {
+        font-family: 'Georgia', serif;
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        color: var(--text-color);
+        background-color: #fff;
+    }
+
+    .header-alérgenos {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .header-alérgenos h2 {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: 400;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 15px;
+        display: inline-block;
+    }
+
+    .grid-alérgenos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+
+    .card-alérgeno {
+        display: flex;
+        align-items: flex-start;
+        padding: 20px;
+        border: 1px solid var(--border-color);
+        background-color: var(--bg-light);
+        transition: transform 0.3s ease;
+    }
+
+    .card-alérgeno:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .logo-alérgeno {
+        width: 60px;
+        height: 60px;
+        margin-right: 20px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        /* Espacio para la imagen que generaste */
+        background-size: cover;
+        border: 1px solid var(--accent-color);
+    }
+
+    .info-alérgeno h3 {
+        margin: 0 0 8px 0;
+        font-size: 1.1rem;
+        color: var(--accent-color);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .info-alérgeno p {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #666;
+        font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+        .grid-alérgenos {
+            grid-template-columns: 1fr;
+        }
+    }
     </style>
 </head>
 <body>
@@ -464,6 +540,64 @@
             </div>
         </div>
     </section>
+
+
+    <section class="section-alérgenos">
+        <div class="header-alérgenos">
+            <h2>Información de Alérgenos</h2>
+        </div>
+
+        <div class="grid-alérgenos">
+            <article class="card-alérgeno">
+                <img src="./img/alergenos/sulfitos.png" alt="Logo Sulfitos" class="logo-alérgeno">
+                <div class="info-alérgeno">
+                    <h3>Sulfitos</h3>
+                    <p>Presentes comúnmente en vinos, vinagres y productos conservados. Crucial para personas con sensibilidad asmática.</p>
+                </div>
+            </article>
+
+            <article class="card-alérgeno">
+                <img src="./img/alergenos/gluten.png" alt="Logo Gluten" class="logo-alérgeno">
+                <div class="info-alérgeno">
+                    <h3>Gluten</h3>
+                    <p>Cereales como trigo, cebada y centeno. Incluye harinas y espesantes utilizados en salsas tradicionales.</p>
+                </div>
+            </article>
+
+            <article class="card-alérgeno">
+                <img src="./img/alergenos/frutos.png" alt="Logo Frutos de cáscara" class="logo-alérgeno">
+                <div class="info-alérgeno">
+                    <h3>Frutos de Cáscara</h3>
+                    <p>Incluye almendras, avellanas y nueces, utilizados en nuestros picados serranos y postres artesanales.</p>
+                </div>
+            </article>
+
+            <article class="card-alérgeno">
+                <img src="./img/alergenos/lacteos.png" alt="Logo Lácteos" class="logo-alérgeno">
+                <div class="info-alérgeno">
+                    <h3>Lácteos</h3>
+                    <p>Presente en nuestras mantequillas de hierbas, purés cremosos y elaboraciones con leche de cabra.</p>
+                </div>
+            </article>
+
+            <article class="card-alérgeno">
+                <img src="./img/alergenos/pescado.png" alt="Logo Pescado" class="logo-alérgeno">
+                <div class="info-alérgeno">
+                    <h3>Pescado</h3>
+                    <p>Presente en nuestras truchas de río y en algunos fondos marinos utilizados para potenciar caldos y salsas.</p>
+                </div>
+            </article>
+
+            <article class="card-alérgeno">
+                <img src="./img/alergenos/huevos.png" alt="Logo Huevo" class="logo-alérgeno">
+                <div class="info-alérgeno">
+                    <h3>Huevo</h3>
+                    <p>Utilizado principalmente en el rebozado artesanal de nuestras croquetas y en la emulsión de salsas frescas.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
 
     <section id="carta" class="reveal" style="background: var(--white);">
         <div class="menu-header">
