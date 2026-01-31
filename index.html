@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sabor A Monte | Cocina Sostenible Con Alma Serrana</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --green: #2b662e;
@@ -502,6 +503,297 @@
             grid-template-columns: 1fr;
         }
     }
+
+    .selector-cartas {
+        padding: 80px 20px;
+        background: var(--white);
+        text-align: center;
+        font-family: 'Georgia', serif;
+    }
+
+    .menu-header {
+        margin-bottom: 60px;
+    }
+
+    .menu-main-title {
+        font-size: 2.5rem;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        color: var(--text-dark);
+        margin: 10px 0;
+    }
+
+    .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .carta-card {
+        text-decoration: none;
+        color: inherit;
+        background: var(--soft-cream);
+        border: 1px solid var(--card-border);
+        display: flex;
+        flex-direction: column;
+        transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Contenedor de la imagen con tamaño controlado */
+    .carta-image-wrapper {
+        width: 100%;
+        height: 250px; /* Altura fija para que todas las cartas sean iguales */
+        overflow: hidden;
+        border-bottom: 1px solid var(--card-border);
+    }
+
+    .carta-image-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Asegura que la imagen llene el espacio sin deformarse */
+        transition: transform 0.6s ease;
+    }
+
+    .carta-info {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: var(--soft-cream);
+        transition: background 0.5s;
+    }
+
+    .carta-title {
+        font-size: 1.3rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        color: var(--text-dark);
+        transition: color 0.4s;
+    }
+
+    .btn-ver {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        padding: 12px 25px;
+        border: 1px solid var(--accent-green);
+        color: var(--accent-green);
+        transition: all 0.4s;
+    }
+
+    /* --- Efectos HOVER --- */
+    .carta-card:hover {
+        transform: translateY(-12px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    .carta-card:hover .carta-image-wrapper img {
+        transform: scale(1.1); /* Zoom suave en la imagen */
+    }
+
+    .carta-card:hover .carta-info {
+        background: var(--accent-green);
+    }
+
+    /*.carta-card:hover .carta-title {
+        color: var(--white);
+    }*/
+
+    /*.carta-card:hover .btn-ver {
+        color: var(--white);
+        border-color: var(--white);
+    }*/
+
+    @media (max-width: 768px) {
+        .menu-main-title { font-size: 2rem; }
+        .carta-image-wrapper { height: 200px; }
+    }
+
+#contacto {
+        padding: 80px 20px;
+        background: var(--white);
+        font-family: 'Georgia', serif;
+    }
+
+    .reserva-wrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: #fff;
+        border: 1px solid #e0e0db;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+    }
+
+    /* CALENDARIO DINÁMICO */
+    .cal-section {
+        padding: 30px;
+        border-right: 1px solid #e0e0db;
+        background: var(--soft-cream);
+    }
+
+    .cal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .cal-btn {
+        background: none;
+        border: 1px solid var(--accent-green);
+        color: var(--accent-green);
+        cursor: pointer;
+        padding: 5px 10px;
+        transition: 0.3s;
+    }
+
+    .cal-btn:hover { background: var(--accent-green); color: #fff; }
+
+    .cal-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+    }
+
+    .cal-day-name { font-size: 0.7rem; text-align: center; font-weight: bold; color: #999; padding-bottom: 10px; }
+
+    .cal-date {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        cursor: pointer;
+        background: #fff;
+        border: 1px solid #eee;
+        transition: 0.2s;
+        font-family: sans-serif;
+    }
+
+    /* Estados Dinámicos */
+    .date-full { background: #ffebee; color: #c62828; cursor: not-allowed; border-bottom: 3px solid var(--full-red); }
+    .date-limited { background: #fff3e0; border-bottom: 3px solid var(--limited-orange); }
+    .date-available { border-bottom: 3px solid var(--avail-green); }
+    .date-available:hover { transform: scale(1.1); z-index: 2; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
+    .date-selected { background: var(--accent-green) !important; color: green !important; font-size: 30px !important;}
+
+    /* FORMULARIO Y HORAS */
+    .form-section { padding: 30px; }
+
+    .time-selector {
+        display: none; /* Se activa al elegir fecha */
+        margin-bottom: 25px;
+        animation: fadeIn 0.5s;
+    }
+
+    .time-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .time-chip {
+        padding: 8px;
+        border: 1px solid var(--accent-green);
+        text-align: center;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .time-chip:hover, .time-chip.selected { background: var(--accent-green); color: green !important; font-size: 30px !important; }
+
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 5px; color: #666; }
+    .form-group input, .form-group select {
+        width: 100%; padding: 10px; border: 1px solid #ccc; font-family: sans-serif;
+    }
+
+    .btn-submit {
+        width: 100%;
+        background: green;
+        color: white;
+        padding: 15px;
+        border: none;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+        .reserva-wrapper { grid-template-columns: 1fr; }
+        .cal-section { border-right: none; border-bottom: 1px solid #e0e0db; }
+    }
+
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8);
+        z-index: 2000;
+        align-items: center; justify-content: center;
+        backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+        background: white;
+        padding: 0;
+        max-width: 450px;
+        width: 90%;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        animation: fadeIn 0.3s ease;
+    }
+
+    /* Estilo Ticket */
+    .ticket-header { background: var(--accent-green); color: white; padding: 20px; text-align: center; }
+    .ticket-body { padding: 30px; line-height: 2; color: #333; font-family: sans-serif; }
+    .ticket-body b { color: var(--accent-green); text-transform: uppercase; font-size: 0.8rem; }
+    .ticket-footer { padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+
+    .btn-confirmar { background: var(--accent-green); color: white; border: none; padding: 12px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; }
+    .btn-cancelar { background: none; border: none; color: #888; text-decoration: underline; cursor: pointer; font-size: 0.8rem; }
+
+    .modal-content.success { padding: 40px; text-align: center; border-top: 5px solid var(--avail-green); }
+
+    .footer-social {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: var(--text-dark); /* O el color que uses para el texto */
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+    }
+
+    .social-link i {
+        font-size: 1.2rem;
+        width: 30px; /* Ancho fijo para que los nombres de usuario queden alineados */
+        color: var(--accent-green);
+        transition: transform 0.3s ease;
+    }
+
+    .social-link:hover {
+        color: var(--accent-green);
+        padding-left: 5px; /* Pequeño desplazamiento al hacer hover */
+    }
+
+    .social-link:hover i {
+        transform: scale(1.2);
+    }
     </style>
 </head>
 <body>
@@ -517,9 +809,9 @@
     </header>
 
     <div class="overlay-menu" id="mobileMenu">
-        <a href="#historia" onclick="toggleMenu()">Historia</a>
-        <a href="#carta" onclick="toggleMenu()">La Carta</a>
-        <a href="#contacto" onclick="toggleMenu()">Reserva</a>
+        <a href="#historia" onclick="toggleMenu()">Nuestra Historia</a>
+        <a href="#carta" onclick="toggleMenu()">Nuestras Cartas</a>
+        <a href="#contacto" onclick="toggleMenu()">Reserva Mesa</a>
     </div>
 
     <main>
@@ -532,17 +824,17 @@
     <section id="historia" class="reveal">
         <div class="grid-story">
             <div class="image-container">
-                <img src="./img/img1.png" alt="Recolección de tomates orgánicos en la sierra">
+                <img src="./img/img1.jpeg" alt="Recolección de tomates orgánicos en la sierra">
             </div>
             <div>
                 <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--green); margin-bottom: 2rem;">El origen de cada bocado.</h2>
-                <p>En Sabor A Monte, no solo cocinamos. Cultivamos relaciones con la tierra. Cada ingrediente bio que llega a tu mesa ha sido seleccionado en nuestra huerta serrana a primera hora del día.</p>
+                <p>De niña aprendí que la tierra se escucha. Crecí entre montañas, agua y cultivos en los Andes del Perú, donde todo tenía un ritmo y un respeto. Hoy, en Cercedilla, ese recuerdo vuelve a latir. <br><br> Sabor a Monte nace de esa añoranza: de entender que la tierra es una sola, esté aquí o allá. Cocinamos desde la memoria, el origen y el cuidado, con producto local y una forma de hacer consciente, honesta y viva.</p>
             </div>
         </div>
     </section>
 
 
-    <section class="section-alérgenos">
+    <!--<section class="section-alérgenos">
         <div class="header-alérgenos">
             <h2>Información de Alérgenos</h2>
         </div>
@@ -596,291 +888,131 @@
                 </div>
             </article>
         </div>
-    </section>
+    </section>-->
 
-
-    <section id="carta" class="reveal" style="background: var(--white);">
+    <section id="carta" class="selector-cartas reveal">
         <div class="menu-header">
-            <span class="menu-subtitle">Experiencia Gastronómica</span>
-            <h2 class="menu-main-title">Nuestra Carta</h2>
+            <span class="menu-subtitle" style="text-transform: uppercase; letter-spacing: 2px; color: #888; font-size: 0.9rem;">Experiencia Gastronómica</span>
+            <h2 class="menu-main-title">Nuestras Cartas</h2>
             <p class="menu-disclaimer">Todos nuestros platos son elaborados con productos frescos y de temporada, procedentes de productores locales y respetuosos con el medio ambiente.</p>
         </div>
 
-        <div class="menu-container">
-            <div class="menu-category">
-                <h3 class="category-title">Entrantes</h3>
-                
-                <div class="menu-item">
-                    <div class="item-content">
-                        <div class="item-header">
-                            <span class="item-name">Crema tibia de calabaza y puerro</span>
-                            <span class="item-dots"></span>
-                            <span class="item-price">14€</span>
-                        </div>
-                        <p class="item-description">Con un toque sutil de miel de tomillo recolectada en la sierra.</p>
-                        <div class="allergen-icons">
-                            <img src="./img/alergenos/gluten.png" alt="Gluten" title="Gluten">
-                            <img src="./img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
-                        </div>
-                    </div>
-                    <div class="item-image-wrapper">
-                        <img src="./img/menu1/menu1.png" alt="Crema de calabaza" class="item-image">
-                    </div>
+        <div class="cards-container">
+            <a href="./nuestras-cartas/menu-del-dia/" class="carta-card">
+                <div class="carta-image-wrapper">
+                    <img src="./img/1CartaDia.png" alt="Menú del día">
                 </div>
-
-                <div class="menu-item">
-                    <div class="item-content">
-                        <div class="item-header">
-                            <span class="item-name">Ensalada de queso de cabra templado</span>
-                            <span class="item-dots"></span>
-                            <span class="item-price">16€</span>
-                        </div>
-                        <p class="item-description">Manzana asada, nueces de la zona y nuestra vinagreta suave secreta.</p>
-                        <div class="allergen-icons">
-                            <img src="./img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
-                            <img src="./img/alergenos/frutos.png" alt="Frutos secos" title="Frutos secos">
-                        </div>
-                    </div>
-                    <div class="item-image-wrapper">
-                        <img src="./img/menu1/menu2.png" alt="Ensalada de queso de cabra" class="item-image">
-                    </div>
+                <div class="carta-info">
+                    <h3 class="carta-title">Menú del Día</h3>
+                    <span class="btn-ver">Explorar Selección</span>
                 </div>
+            </a>
 
-                <div class="menu-item">
-                    <div class="item-content">
-                        <div class="item-header">
-                            <span class="item-name">Trucha curada en cítricos</span>
-                            <span class="item-dots"></span>
-                            <span class="item-price">18€</span>
-                        </div>
-                        <p class="item-description">Brotes tiernos del huerto y aceite virgen aromatizado de romero fresco.</p>
-                        <div class="allergen-icons">
-                            <img src="./img/alergenos/pescado.png" alt="Pescado" title="Pescado">
-                        </div>
-                    </div>
-                    <div class="item-image-wrapper">
-                        <img src="./img/menu1/menu3.png" alt="Trucha curada en cítricos" class="item-image">
-                    </div>
+            <a href="./nuestras-cartas/cocina-de-montaña/" class="carta-card">
+                <div class="carta-image-wrapper">
+                    <img src="./img/2CartaMontaña.png" alt="Cocina de Montaña">
                 </div>
-
-                <div class="menu-item">
-                    <div class="item-content">
-                        <div class="item-header">
-                            <span class="item-name">Champiñones rellenos de temporada</span>
-                            <span class="item-dots"></span>
-                            <span class="item-price">15€</span>
-                        </div>
-                        <p class="item-description">Elaboración artesanal según disponibilidad diaria del mercado.</p>
-                        <div class="allergen-icons">
-                            </div>
-                    </div>
-                    <div class="item-image-wrapper">
-                        <img src="./img/menu1/menu4.png" alt="Champiñones rellenos" class="item-image">
-                    </div>
+                <div class="carta-info">
+                    <h3 class="carta-title">Cocina de Montaña</h3>
+                    <span class="btn-ver">Explorar Selección</span>
                 </div>
+            </a>
 
-                <div class="menu-item">
-                    <div class="item-content">
-                        <div class="item-header">
-                            <span class="item-name">Croquetas cremosas de boletus</span>
-                            <span class="item-dots"></span>
-                            <span class="item-price">14€</span>
-                        </div>
-                        <p class="item-description">Con base de cebolla caramelizada y una textura fundente incomparable.</p>
-                        <div class="allergen-icons">
-                            <img src="./img/alergenos/gluten.png" alt="Gluten" title="Gluten">
-                            <img src="./img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
-                        </div>
+            <a href="./nuestras-cartas/carta-de-postres/" class="carta-card">
+                <div class="carta-image-wrapper">
+                    <img src="./img/3CartaPostres.png" alt="Carta de Postres">
+                </div>
+                <div class="carta-info">
+                    <h3 class="carta-title">Carta de Postres</h3>
+                    <span class="btn-ver">Explorar Selección</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="contacto">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="text-transform: uppercase; letter-spacing: 4px; color: var(--accent-green);">Reserva de Mesa</h2>
+            <p style="font-style: italic; color: #888;">Gestione su estancia en Sabor a Monte</p>
+        </div>
+
+        <div class="reserva-wrapper">
+            <div class="cal-section">
+                <div class="cal-header">
+                    <button class="cal-btn" onclick="changeMonth(-1)">❮</button>
+                    <h3 id="currentMonth" style="margin:0; font-size: 1.1rem; text-transform: uppercase;">Enero 2026</h3>
+                    <button class="cal-btn" onclick="changeMonth(1)">❯</button>
+                </div>
+                <div class="cal-grid" id="calendarGrid">
                     </div>
-                    <div class="item-image-wrapper">
-                        <img src="./img/menu1/menu5.png" alt="Croquetas de boletus" class="item-image">
-                    </div>
+                <div style="margin-top:20px; font-size:0.7rem; display:flex; gap:10px; justify-content:center;">
+                    <span><b style="color: green;">■</b> Disponible</span>
+                    <span><b style="color: orange;">■</b> Últimas mesas</span>
+                    <span><b style="color: red;">■</b> Completo</span>
                 </div>
             </div>
 
-            <div class="menu-category">
-                <h3 class="category-title">Platos Principales</h3>
-                
-                <div class="menu-item special">
-                    <div class="item-content">
-                        <div class="item-header">
-                            <span class="item-name">Cordero lechal al horno</span>
-                            <span class="item-dots"></span>
-                            <span class="item-price">54€</span>
+            <div class="form-section">
+                <div id="timeSelector" class="time-selector">
+                    <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-green); font-weight: bold;">Horas Disponibles para el <span id="selectedDateText">...</span>:</label>
+                    <div class="time-grid" id="timeGrid">
                         </div>
-                        <p class="item-description">Asado lentamente al estilo tradicional en horno de leña. (Mínimo 2 personas, por encargo).</p>
-                        <div class="allergen-icons">
-                            <img src="./img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
-                        </div>
-                    </div>
-                    <div class="item-image-wrapper">
-                        <img src="./img/menu1/menu6.png" alt="Cordero lechal al horno" class="item-image">
-                    </div>
                 </div>
 
-                <div class="menu-item">
-                    <div class="item-content">
-                        <div class="item-header">
-                            <span class="item-name">Trucha a la parrilla</span>
-                            <span class="item-dots"></span>
-                            <span class="item-price">21€</span>
-                        </div>
-                        <p class="item-description">Acompañada de una emulsión de mantequilla de hierbas serranas.</p>
-                        <div class="allergen-icons">
-                            <img src="./img/alergenos/pescado.png" alt="Pescado" title="Pescado">
-                            <img src="./img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
-                        </div>
+                <form id="reservaForm">
+                    <div class="form-group">
+                        <label>Nombre Completo</label>
+                        <input type="text" id="nombre" required placeholder="Su nombre...">
                     </div>
-                    <div class="item-image-wrapper">
-                        <img src="./img/menu1/menu7.png" alt="Trucha a la parrilla" class="item-image">
+                    <div class="form-group">
+                        <label>Correo Electrónico</label>
+                        <input type="email" id="email" required placeholder="email@ejemplo.com">
                     </div>
-                </div>
-
-                <div class="menu-item">
-                    <div class="item-content">
-                        <div class="item-header">
-                            <span class="item-name">Lomo alto a la brasa</span>
-                            <span class="item-dots"></span>
-                            <span class="item-price">26€</span>
-                        </div>
-                        <p class="item-description">Cocinado al punto exacto, servido en su propio jugo concentrado.</p>
-                        <div class="allergen-icons">
-                            </div>
+                    <div class="form-group">
+                        <label>Teléfono de Contacto</label>
+                        <input type="tel" id="tel" required placeholder="600 000 000">
                     </div>
-                    <div class="item-image-wrapper">
-                        <img src="./img/menu1/menu8.png" alt="Lomo alto a la brasa" class="item-image">
+                    <div class="form-group">
+                        <label>Comensales</label>
+                        <select id="personas">
+                            <option>2 Personas</option>
+                            <option>3 Personas</option>
+                            <option>4 Personas</option>
+                            <option>5+ Personas (Sujeto a confirmación)</option>
+                        </select>
                     </div>
-                </div>
-
-                <div class="menu-item">
-                    <div class="item-content">
-                        <div class="item-header">
-                            <span class="item-name">Ciervo guisado al estilo serrano</span>
-                            <span class="item-dots"></span>
-                            <span class="item-price">24€</span>
-                        </div>
-                        <p class="item-description">Elaboración tradicional con hierbas de monte. (Plato de temporada).</p>
-                        <div class="allergen-icons">
-                            </div>
-                    </div>
-                    <div class="item-image-wrapper">
-                        <img src="./img/menu1/menu9.png" alt="Ciervo guisado" class="item-image">
-                    </div>
-                </div>
-
-                <div class="menu-item special">
-                    <div class="item-content">
-                        <div class="item-header">
-                            <span class="item-name">Cabrito al horno clásico</span>
-                            <span class="item-dots"></span>
-                            <span class="item-price">52€</span>
-                        </div>
-                        <p class="item-description">Receta ancestral de la sierra. (Mínimo 2 personas, por encargo).</p>
-                        <div class="allergen-icons">
-                            <img src="./img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
-                        </div>
-                    </div>
-                    <div class="item-image-wrapper">
-                        <img src="./img/menu1/menu10.png" alt="Cabrito al horno" class="item-image">
-                    </div>
-                </div>
-
-                <div class="menu-item">
-                    <div class="item-content">
-                        <div class="item-header">
-                            <span class="item-name">Codorniz estofada</span>
-                            <span class="item-dots"></span>
-                            <span class="item-price">22€</span>
-                        </div>
-                        <p class="item-description">Cocción lenta en fondo aromático profundo. (Según temporada).</p>
-                        <div class="allergen-icons">
-                            <img src="./img/alergenos/sulfitos.png" alt="Sulfitos" title="Sulfitos">
-                        </div>
-                    </div>
-                    <div class="item-image-wrapper">
-                        <img src="./img/menu1/menu11.png" alt="Codorniz estofada" class="item-image">
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-category">
-                <h3 class="category-title">Guarniciones</h3>
-                <div class="guarniciones-grid">
-                    <div class="menu-item">
-                        <div class="item-content">
-                            <div class="item-header">
-                                <span class="item-name">ENSALADA DE LA HUERTA</span>
-                                <span class="item-dots"></span>
-                                <span class="item-price">14€</span>
-                            </div>
-                            <p class="item-description">Verduras frescas de temporada.</p>
-                            <div class="allergen-icons">
-
-                            </div>
-                        </div>
-                        <div class="item-image-wrapper">
-                            <img src="./img/menu1/menu12.png" alt="Ensalada de la huerta" class="item-image">
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <div class="item-content">
-                            <div class="item-header">
-                                <span class="item-name">ENSALADA DE QUINOA</span>
-                                <span class="item-dots"></span>
-                                <span class="item-price">14€</span>
-                            </div>
-                            <p class="item-description">Con hortalizas y aliño suave.</p>
-                            <div class="allergen-icons">
-
-                            </div>
-                        </div>
-                        <div class="item-image-wrapper">
-                            <img src="./img/menu1/menu13.png" alt="Ensalada de quinoa" class="item-image">
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <div class="item-content">
-                            <div class="item-header">
-                                <span class="item-name">PURÉ DE CASTAÑAS</span>
-                                <span class="item-dots"></span>
-                                <span class="item-price">14€</span>
-                            </div>
-                            <p class="item-description"> Con reducción ligera de ají amarillo.</p>
-                            <div class="allergen-icons">
-                                <img src="./img/alergenos/frutos.png" alt="Frutos Secos" title="Frutos Secos">
-                            </div>
-                        </div>
-                        <div class="item-image-wrapper">
-                            <img src="./img/menu1/menu14.png" alt="Puré de castañas" class="item-image">
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <div class="item-content">
-                            <div class="item-header">
-                                <span class="item-name">Patatas asadas</span>
-                                <span class="item-dots"></span>
-                                <span class="item-price">14€</span>
-                            </div>
-                            <p class="item-description">Con mantequilla de hierbas.</p>
-                            <div class="allergen-icons">
-                                <img src="./img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
-                            </div>
-                        </div>
-                        <div class="item-image-wrapper">
-                            <img src="./img/menu1/menu15.png" alt="Patatas asadas" class="item-image">
-                        </div>
-                    </div>
-
-                </div>
+                    <button type="submit" class="btn-submit">Solicitar Reserva</button>
+                </form>
             </div>
         </div>
     </section>
+
+        <div id="modalTicket" class="modal-overlay">
+            <div class="modal-content ticket">
+                <div class="ticket-header">
+                    <h3 style="margin:0; letter-spacing: 2px; color: green;">RESUMEN DE RESERVA</h3>
+                    <p style="font-size: 0.8rem; opacity: 0.8; color: green;">Sabor a Monte - Cocina de Montaña</p>
+                </div>
+                <div class="ticket-body" id="ticketData">
+                    </div>
+                <div class="ticket-footer">
+                    <button onclick="confirmarFinal()" class="btn-confirmar" style="color: white; background: green;">Confirmar Reserva</button>
+                    <button onclick="cerrarTicket()" class="btn-cancelar">Modificar datos</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modalExito" class="modal-overlay">
+            <div class="modal-content success">
+                <div style="font-size: 3rem; color: var(--avail-green);">✓</div>
+                <h2 style="margin-top: 15px; margin-bottom: 15px;">RESERVA HECHA</h2>
+                <p>Le esperamos pronto en nuestro restaurante. Se ha enviado un comprobante a su email.</p>
+                <button onclick="finalizarTodo()" class="btn-submit" style="margin-top: 15px;">Entendido</button>
+            </div>
+        </div>
     </main>
 
-    <footer id="contacto">
+    <footer id="informacion">
         <div class="footer-grid">
             <div>
                 <h2 style="font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 1rem;">Sabor A Monte</h2>
@@ -890,11 +1022,29 @@
                 <h4 style="margin-bottom: 1rem;">Ubicación</h4>
                 <p>Calle del Roble, 12</p>
                 <p>Sierra Norte, Madrid</p>
+
+                <div style="margin-top: 1rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                    <p style="font-size: 0.9rem;"><i class="fas fa-phone"></i> +34 600 000 000</p>
+                    <p style="font-size: 0.9rem;"><i class="fas fa-envelope"></i> hola@saboramonte.com</p>
+                </div>
             </div>
-            <div>
-                <h4 style="margin-bottom: 1rem;">Reservas</h4>
-                <p>+34 600 000 000</p>
-                <p>hola@saboramonte.com</p>
+            <div class="footer-social">
+                <h4 style="margin-bottom: 1rem;">¡Síguenos!</h4>
+                
+                <a href="https://www.instagram.com/saboramonte2026/" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                    <span>@saboramonte2026</span>
+                </a>
+
+                <a href="https://www.tiktok.com/@rosapantojai" target="_blank" class="social-link">
+                    <i class="fab fa-tiktok"></i>
+                    <span>rosapantojai</span>
+                </a>
+
+                <a href="https://es.linkedin.com/in/rosa-pantoja-00b427368" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                    <span>Rosa Pantoja</span>
+                </a>
             </div>
         </div>
     </footer>
@@ -925,6 +1075,165 @@
         }, observerOptions);
 
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Configuramos la fecha real de hoy
+let today = new Date();
+let viewDate = new Date(today.getFullYear(), today.getMonth(), 1); 
+
+const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+function renderCalendar() {
+    const grid = document.getElementById('calendarGrid');
+    const monthTitle = document.getElementById('currentMonth');
+    grid.innerHTML = "";
+    
+    monthTitle.innerText = `${monthNames[viewDate.getMonth()]} ${viewDate.getFullYear()}`;
+
+    ["L", "M", "X", "J", "V", "S", "D"].forEach(d => {
+        grid.innerHTML += `<div class="cal-day-name">${d}</div>`;
+    });
+
+    let firstDay = new Date(viewDate.getFullYear(), viewDate.getMonth(), 1).getDay();
+    let daysInMonth = new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 0).getDate();
+    let startPos = firstDay === 0 ? 6 : firstDay - 1;
+
+    for (let i = 0; i < startPos; i++) grid.innerHTML += `<div></div>`;
+
+    for (let d = 1; d <= daysInMonth; d++) {
+        let currentIterDate = new Date(viewDate.getFullYear(), viewDate.getMonth(), d);
+        let dateDiv = document.createElement('div');
+        dateDiv.innerText = d;
+        
+        // Lógica de validación de fechas pasadas
+        // Normalizamos horas para comparar solo fechas
+        let dateComparison = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+        
+        if (currentIterDate < dateComparison) {
+            // Día pasado
+            dateDiv.className = "cal-date";
+            dateDiv.style.color = "#ccc";
+            dateDiv.style.background = "#f9f9f9";
+            dateDiv.style.cursor = "not-allowed";
+            dateDiv.style.borderBottom = "1px solid #eee";
+        } else {
+            // Día futuro o hoy: asignamos disponibilidad aleatoria
+            let statusClass = "date-available";
+            let rand = Math.random();
+            if (rand < 0.2) statusClass = "date-full";
+            else if (rand < 0.4) statusClass = "date-limited";
+
+            dateDiv.className = `cal-date ${statusClass}`;
+            
+            if (statusClass !== "date-full") {
+                dateDiv.onclick = () => selectDate(d, dateDiv, currentIterDate);
+            }
+        }
+        grid.appendChild(dateDiv);
+    }
+}
+
+function selectDate(day, element, selectedDateObj) {
+    document.querySelectorAll('.cal-date').forEach(el => el.classList.remove('date-selected'));
+    element.classList.add('date-selected');
+    
+    document.getElementById('timeSelector').style.display = 'block';
+    document.getElementById('selectedDateText').innerText = day + " de " + monthNames[viewDate.getMonth()];
+    
+    const timeGrid = document.getElementById('timeGrid');
+    timeGrid.innerHTML = "";
+    
+    // Lista de turnos del restaurante
+    const turnos = ["13:00", "13:30", "14:00", "14:30", "20:30", "21:00", "21:30", "22:00"];
+    
+    // Si el día elegido es hoy, filtramos horas pasadas
+    let horasFiltradas = turnos;
+    if (selectedDateObj.toDateString() === today.toDateString()) {
+        let currentHour = today.getHours() + ":" + today.getMinutes();
+        horasFiltradas = turnos.filter(h => h > currentHour);
+    }
+
+    if (horasFiltradas.length === 0) {
+        timeGrid.innerHTML = "<p style='font-size:0.8rem; color:red; grid-column: 1/-1;'>No hay turnos disponibles para hoy.</p>";
+    } else {
+        horasFiltradas.forEach(h => {
+            timeGrid.innerHTML += `<div class="time-chip" onclick="selectTime(this)">${h}</div>`;
+        });
+    }
+}
+
+function selectTime(el) {
+    // Quitamos la clase 'selected' de todos los chips de hora
+    document.querySelectorAll('.time-chip').forEach(t => t.classList.remove('selected'));
+    
+    // Se la añadimos al que acabamos de clickar
+    el.classList.add('selected');
+}
+
+function changeMonth(dir) {
+    viewDate.setMonth(viewDate.getMonth() + dir);
+    renderCalendar();
+    document.getElementById('timeSelector').style.display = 'none';
+}
+
+// Inicialización
+renderCalendar();
+
+// 1. Al dar clic en "Solicitar Reserva"
+document.getElementById('reservaForm').onsubmit = function(e) {
+    e.preventDefault();
+    
+    const hora = document.querySelector('.time-chip.selected');
+    if (!hora) {
+        alert("Por favor, seleccione una hora en el calendario.");
+        return;
+    }
+
+    // Capturar datos
+    const datos = {
+        nombre: document.getElementById('nombre').value,
+        email: document.getElementById('email').value,
+        tel: document.getElementById('tel').value,
+        personas: document.getElementById('personas').value,
+        fecha: document.getElementById('selectedDateText').innerText,
+        hora: hora.innerText
+    };
+
+    // Inyectar en el Ticket
+    document.getElementById('ticketData').innerHTML = `
+        <div style="border-bottom: 1px dashed #ccc; padding-bottom: 10px; margin-bottom: 10px;">
+            <b>Cliente:</b> ${datos.nombre}<br>
+            <b>Contacto:</b> ${datos.tel} / ${datos.email}
+        </div>
+        <div>
+            <b>Fecha:</b> ${datos.fecha}<br>
+            <b>Hora:</b> ${datos.hora}<br>
+            <b>Comensales:</b> ${datos.personas}
+        </div>
+    `;
+
+    document.getElementById('modalTicket').style.display = 'flex';
+};
+
+// 2. Cerrar ticket para corregir
+function cerrarTicket() {
+    document.getElementById('modalTicket').style.display = 'none';
+}
+
+// 3. Confirmación final
+function confirmarFinal() {
+    document.getElementById('modalTicket').style.display = 'none';
+    document.getElementById('modalExito').style.display = 'flex';
+}
+
+// 4. Resetear todo al finalizar
+function finalizarTodo() {
+    document.getElementById('modalExito').style.display = 'none';
+    document.getElementById('reservaForm').reset();
+    document.getElementById('timeSelector').style.display = 'none';
+    document.querySelectorAll('.cal-date').forEach(el => el.classList.remove('date-selected'));
+    // Opcional: recargar calendario
+    renderCalendar();
+}
     </script>
 </body>
 </html>
