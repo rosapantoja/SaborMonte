@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sabor A Monte | Cocina Sostenible Con Alma Serrana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green: #2b662e;
+            --cream: #fdfcf0; /* Un blanco roto más cálido y hostelería */
+            --white: #ffffff;
+            --dark: #1a1c1a;
+            --transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: none; /* Para el cursor personalizado */
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* --- Custom Cursor --- */
+        #cursor {
+            width: 20px;
+            height: 20px;
+            background: var(--green);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: multiply;
+            transition: transform 0.1s ease;
+        }
+
+        /* --- Header & Nav --- */
+        header {
+            background-color: white;
+            position: fixed;
+            width: 100%;
+            padding: 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        /* Rediseño del Toggle - Estilo Minimalista */
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .nav-btn span {
+            width: 20px;
+            height: 2px;
+            background: var(--white);
+            transition: var(--transition);
+        }
+
+        .nav-btn.active span:nth-child(1) { transform: translateY(3px) rotate(45deg); }
+        .nav-btn.active span:nth-child(2) { transform: translateY(-3px) rotate(-45deg); }
+
+        /* Fullscreen Menu */
+        .overlay-menu {
+            position: fixed;
+            inset: 0;
+            background: var(--green);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            clip-path: circle(0% at 90% 10%);
+            transition: clip-path 0.8s ease-in-out;
+            z-index: 998;
+        }
+
+        .overlay-menu.active { clip-path: circle(150% at 90% 10%); }
+
+        .overlay-menu a {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--cream);
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.4s;
+        }
+
+        .overlay-menu.active a {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.4s;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            position: relative;
+        }
+
+        .hero-tag {
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            line-height: 0.9;
+            color: var(--green);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        /* --- Sections & Reveal Animation --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section {
+            padding: 10rem 10%;
+        }
+
+        .grid-story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            aspect-ratio: 4/5;
+            background: var(--green);
+            border-radius: 200px 200px 0 0; /* Forma orgánica de arco */
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- Menu Cards --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 4rem 2rem;
+            border: 1px solid rgba(43, 102, 46, 0.1);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            background: var(--green);
+            color: var(--white);
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--green);
+            color: var(--cream);
+            padding: 5rem 10%;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 550px; /* Altura fija para mantener la elegancia */
+            border-radius: 250px 250px 0 0; /* Mantiene la forma orgánica de arco */
+            overflow: hidden; /* Corta la imagen para que respete el arco */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05); /* Sombra suave para dar profundidad */
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Esto es vital: ajusta la imagen sin estirarla */
+            object-position: center; /* Centra la acción de la imagen */
+            transition: transform 1.2s ease; /* Efecto sutil de zoom al pasar el ratón */
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05); /* Zoom elegante al hacer hover */
+        }
+
+        /* --- Estilos Carta Editorial --- */
+    .menu-header {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 5rem;
+    }
+
+    .menu-subtitle {
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        font-size: 0.8rem;
+        color: var(--green);
+        display: block;
+        margin-bottom: 1rem;
+    }
+
+    .menu-main-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 4rem;
+        color: var(--green);
+        margin-bottom: 1.5rem;
+    }
+
+    .menu-disclaimer {
+        font-style: italic;
+        color: #666;
+        font-size: 0.95rem;
+    }
+
+    .menu-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .menu-category {
+        margin-bottom: 6rem;
+    }
+
+    .category-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.2rem;
+        color: var(--green);
+        border-bottom: 1px solid var(--green);
+        margin-bottom: 2.5rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .menu-item {
+        margin-bottom: 2rem;
+    }
+
+    .item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+
+    .item-name {
+        font-weight: 600;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .item-dots {
+        flex-grow: 1;
+        border-bottom: 1px dotted rgba(43, 102, 46, 0.3);
+        margin: 0 15px;
+    }
+
+    .item-price {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        color: var(--green);
+        display: none;
+    }
+
+    .item-description {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        color: #555;
+        font-size: 1.1rem;
+        margin-top: 0.3rem;
+    }
+/* --- Estilos Carta Editorial (Ajustes para imagen y alérgenos) --- */
+
+.menu-item {
+    display: flex; /* Para poner contenido e imagen en la misma línea */
+    align-items: flex-start; /* Alinea arriba el contenido y la imagen */
+    margin-bottom: 2.5rem; /* Espaciado entre platos */
+    position: relative;
+}
+
+.item-content {
+    flex-grow: 1; /* Ocupa el espacio disponible */
+    padding-right: 1.5rem; /* Espacio antes de la imagen */
+}
+
+.item-image-wrapper {
+    flex-shrink: 0; /* Evita que la imagen se encoja */
+    width: 120px; /* Ancho fijo para las imágenes de plato */
+    height: 120px; /* Altura fija */
+    border-radius: 5px; /* Bordes ligeramente redondeados */
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Sombra sutil */
+}
+
+.item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen rellene sin deformarse */
+    object-position: center;
+}
+
+.allergen-icons {
+    margin-top: 0.8rem;
+    display: flex;
+    gap: 8px; /* Espacio entre los iconos */
+}
+
+.allergen-icons img {
+    width: 20px; /* Tamaño de los iconos de alérgenos */
+    height: 20px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.allergen-icons img:hover {
+    opacity: 1;
+}
+
+/* Ajustes para las guarniciones con alérgenos */
+.guarniciones-grid .side-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.guarniciones-grid .side-item .allergen-icons {
+    margin-top: 0.5rem;
+}
+
+
+/* ... (mantén el resto de tu CSS para .menu-header, .menu-subtitle, etc.) ... */
+
+@media (max-width: 768px) {
+    .menu-item {
+        flex-direction: column; /* Apila imagen y contenido en móviles */
+        align-items: center;
+        text-align: center;
+    }
+    .item-content {
+        padding-right: 0;
+        margin-bottom: 1rem;
+    }
+    .item-header {
+        flex-wrap: wrap; /* Permite que el precio baje si no hay espacio */
+        justify-content: center;
+    }
+    .item-dots { display: none; } /* Oculta los puntos en móvil para simplificar */
+    .item-image-wrapper { margin-top: 1rem; } /* Espacio entre el texto y la imagen */
+    .allergen-icons { justify-content: center; } /* Centra los iconos */
+}
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-10px) translateX(-50%);}
+            60% {transform: translateY(-5px) translateX(-50%);}
+        }
+
+        @media (max-width: 768px) {
+            .grid-story, .menu-grid, .footer-grid { grid-template-columns: 1fr; }
+            .overlay-menu a { font-size: 2.5rem; }
+            header { padding: 1rem; }
+            * { cursor: auto !important; }
+            #cursor { display: none; }
+        }
+
+        .section-alérgenos {
+        font-family: 'Georgia', serif;
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+        color: var(--text-color);
+        background-color: #fff;
+    }
+
+    .header-alérgenos {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .header-alérgenos h2 {
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: 400;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 15px;
+        display: inline-block;
+    }
+
+    .grid-alérgenos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+    }
+
+    .card-alérgeno {
+        display: flex;
+        align-items: flex-start;
+        padding: 20px;
+        border: 1px solid var(--border-color);
+        background-color: var(--bg-light);
+        transition: transform 0.3s ease;
+    }
+
+    .card-alérgeno:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .logo-alérgeno {
+        width: 60px;
+        height: 60px;
+        margin-right: 20px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        /* Espacio para la imagen que generaste */
+        background-size: cover;
+        border: 1px solid var(--accent-color);
+    }
+
+    .info-alérgeno h3 {
+        margin: 0 0 8px 0;
+        font-size: 1.1rem;
+        color: var(--accent-color);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .info-alérgeno p {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #666;
+        font-style: italic;
+    }
+
+    @media (max-width: 600px) {
+        .grid-alérgenos {
+            grid-template-columns: 1fr;
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <div id="cursor"></div>
+
+    <header>
+        <a href="#" class="logo">Sabor A Monte</a>
+        <div class="nav-btn" id="menuToggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <div class="overlay-menu" id="mobileMenu">
+        <a href="./../../index.html#historia" onclick="toggleMenu()">Nuestra Historia</a>
+        <a href="./../../index.html#carta" onclick="toggleMenu()">Nuestras Cartas</a>
+        <a href="./../../index.html#contacto" onclick="toggleMenu()">Reserva Mesa</a>
+    </div>
+
+    <main>
+        <section id="carta" class="reveal" style="background: var(--white);">
+            <div class="menu-header">
+                <!--<span class="menu-subtitle">Experiencia Gastronómica</span>-->
+                <h2 class="menu-main-title">Cocina de montaña</h2>
+                <!--<p class="menu-disclaimer">Todos nuestros platos son elaborados con productos frescos y de temporada, procedentes de productores locales y respetuosos con el medio ambiente.</p>-->
+            </div>
+
+            <div class="menu-container">
+                <div class="menu-category">
+                    <h3 class="category-title">Entrantes</h3>
+                    
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-header">
+                                <span class="item-name">Crema tibia de calabaza y puerro</span>
+                                <span class="item-dots"></span>
+                                <span class="item-price">14€</span>
+                            </div>
+                            <p class="item-description">Con un toque sutil de miel de tomillo recolectada en la sierra.</p>
+                            <div class="allergen-icons">
+                                <img src="./../../img/alergenos/gluten.png" alt="Gluten" title="Gluten">
+                                <img src="./../../img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
+                            </div>
+                        </div>
+                        <div class="item-image-wrapper">
+                            <img src="./../../img/menu1/menu1.png" alt="Crema de calabaza" class="item-image">
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-header">
+                                <span class="item-name">Ensalada de queso de cabra templado</span>
+                                <span class="item-dots"></span>
+                                <span class="item-price">16€</span>
+                            </div>
+                            <p class="item-description">Manzana asada, nueces de la zona y nuestra vinagreta suave secreta.</p>
+                            <div class="allergen-icons">
+                                <img src="./../../img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
+                                <img src="./../../img/alergenos/frutos.png" alt="Frutos secos" title="Frutos secos">
+                            </div>
+                        </div>
+                        <div class="item-image-wrapper">
+                            <img src="./../../img/menu1/menu2.png" alt="Ensalada de queso de cabra" class="item-image">
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-header">
+                                <span class="item-name">Trucha curada en cítricos</span>
+                                <span class="item-dots"></span>
+                                <span class="item-price">18€</span>
+                            </div>
+                            <p class="item-description">Brotes tiernos del huerto y aceite virgen aromatizado de romero fresco.</p>
+                            <div class="allergen-icons">
+                                <img src="./../../img/alergenos/pescado.png" alt="Pescado" title="Pescado">
+                            </div>
+                        </div>
+                        <div class="item-image-wrapper">
+                            <img src="./../../img/menu1/menu3.png" alt="Trucha curada en cítricos" class="item-image">
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-header">
+                                <span class="item-name">Champiñones rellenos de temporada</span>
+                                <span class="item-dots"></span>
+                                <span class="item-price">15€</span>
+                            </div>
+                            <p class="item-description">Elaboración artesanal según disponibilidad diaria del mercado.</p>
+                            <div class="allergen-icons">
+                                </div>
+                        </div>
+                        <div class="item-image-wrapper">
+                            <img src="./../../img/menu1/menu4.png" alt="Champiñones rellenos" class="item-image">
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-header">
+                                <span class="item-name">Croquetas cremosas de boletus</span>
+                                <span class="item-dots"></span>
+                                <span class="item-price">14€</span>
+                            </div>
+                            <p class="item-description">Con base de cebolla caramelizada y una textura fundente incomparable.</p>
+                            <div class="allergen-icons">
+                                <img src="./../../img/alergenos/gluten.png" alt="Gluten" title="Gluten">
+                                <img src="./../../img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
+                            </div>
+                        </div>
+                        <div class="item-image-wrapper">
+                            <img src="./../../img/menu1/menu5.png" alt="Croquetas de boletus" class="item-image">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3 class="category-title">Platos Principales</h3>
+                    
+                    <div class="menu-item special">
+                        <div class="item-content">
+                            <div class="item-header">
+                                <span class="item-name">Cordero lechal al horno</span>
+                                <span class="item-dots"></span>
+                                <span class="item-price">54€</span>
+                            </div>
+                            <p class="item-description">Asado lentamente al estilo tradicional en horno de leña. (Mínimo 2 personas, por encargo).</p>
+                            <div class="allergen-icons">
+                                <img src="./../../img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
+                            </div>
+                        </div>
+                        <div class="item-image-wrapper">
+                            <img src="./../../img/menu1/menu6.png" alt="Cordero lechal al horno" class="item-image">
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-header">
+                                <span class="item-name">Trucha a la parrilla</span>
+                                <span class="item-dots"></span>
+                                <span class="item-price">21€</span>
+                            </div>
+                            <p class="item-description">Acompañada de una emulsión de mantequilla de hierbas serranas.</p>
+                            <div class="allergen-icons">
+                                <img src="./../../img/alergenos/pescado.png" alt="Pescado" title="Pescado">
+                                <img src="./../../img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
+                            </div>
+                        </div>
+                        <div class="item-image-wrapper">
+                            <img src="./../../img/menu1/menu7.png" alt="Trucha a la parrilla" class="item-image">
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-header">
+                                <span class="item-name">Lomo alto a la brasa</span>
+                                <span class="item-dots"></span>
+                                <span class="item-price">26€</span>
+                            </div>
+                            <p class="item-description">Cocinado al punto exacto, servido en su propio jugo concentrado.</p>
+                            <div class="allergen-icons">
+                                </div>
+                        </div>
+                        <div class="item-image-wrapper">
+                            <img src="./../../img/menu1/menu8.png" alt="Lomo alto a la brasa" class="item-image">
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-header">
+                                <span class="item-name">Ciervo guisado al estilo serrano</span>
+                                <span class="item-dots"></span>
+                                <span class="item-price">24€</span>
+                            </div>
+                            <p class="item-description">Elaboración tradicional con hierbas de monte. (Plato de temporada).</p>
+                            <div class="allergen-icons">
+                                </div>
+                        </div>
+                        <div class="item-image-wrapper">
+                            <img src="./../../img/menu1/menu9.png" alt="Ciervo guisado" class="item-image">
+                        </div>
+                    </div>
+
+                    <div class="menu-item special">
+                        <div class="item-content">
+                            <div class="item-header">
+                                <span class="item-name">Cabrito al horno clásico</span>
+                                <span class="item-dots"></span>
+                                <span class="item-price">52€</span>
+                            </div>
+                            <p class="item-description">Receta ancestral de la sierra. (Mínimo 2 personas, por encargo).</p>
+                            <div class="allergen-icons">
+                                <img src="./../../img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
+                            </div>
+                        </div>
+                        <div class="item-image-wrapper">
+                            <img src="./../../img/menu1/menu10.png" alt="Cabrito al horno" class="item-image">
+                        </div>
+                    </div>
+
+                    <div class="menu-item">
+                        <div class="item-content">
+                            <div class="item-header">
+                                <span class="item-name">Codorniz estofada</span>
+                                <span class="item-dots"></span>
+                                <span class="item-price">22€</span>
+                            </div>
+                            <p class="item-description">Cocción lenta en fondo aromático profundo. (Según temporada).</p>
+                            <div class="allergen-icons">
+                                <img src="./../../img/alergenos/sulfitos.png" alt="Sulfitos" title="Sulfitos">
+                            </div>
+                        </div>
+                        <div class="item-image-wrapper">
+                            <img src="./../../img/menu1/menu11.png" alt="Codorniz estofada" class="item-image">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3 class="category-title">Guarniciones</h3>
+                    <div class="guarniciones-grid">
+                        <div class="menu-item">
+                            <div class="item-content">
+                                <div class="item-header">
+                                    <span class="item-name">ENSALADA DE LA HUERTA</span>
+                                    <span class="item-dots"></span>
+                                    <span class="item-price">14€</span>
+                                </div>
+                                <p class="item-description">Verduras frescas de temporada.</p>
+                                <div class="allergen-icons">
+
+                                </div>
+                            </div>
+                            <div class="item-image-wrapper">
+                                <img src="./../../img/menu1/menu12.png" alt="Ensalada de la huerta" class="item-image">
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="item-content">
+                                <div class="item-header">
+                                    <span class="item-name">ENSALADA DE QUINOA</span>
+                                    <span class="item-dots"></span>
+                                    <span class="item-price">14€</span>
+                                </div>
+                                <p class="item-description">Con hortalizas y aliño suave.</p>
+                                <div class="allergen-icons">
+
+                                </div>
+                            </div>
+                            <div class="item-image-wrapper">
+                                <img src="./../../img/menu1/menu13.png" alt="Ensalada de quinoa" class="item-image">
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="item-content">
+                                <div class="item-header">
+                                    <span class="item-name">PURÉ DE CASTAÑAS</span>
+                                    <span class="item-dots"></span>
+                                    <span class="item-price">14€</span>
+                                </div>
+                                <p class="item-description"> Con reducción ligera de ají amarillo.</p>
+                                <div class="allergen-icons">
+                                    <img src="./../../img/alergenos/frutos.png" alt="Frutos Secos" title="Frutos Secos">
+                                </div>
+                            </div>
+                            <div class="item-image-wrapper">
+                                <img src="./../../img/menu1/menu14.png" alt="Puré de castañas" class="item-image">
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="item-content">
+                                <div class="item-header">
+                                    <span class="item-name">Patatas asadas</span>
+                                    <span class="item-dots"></span>
+                                    <span class="item-price">14€</span>
+                                </div>
+                                <p class="item-description">Con mantequilla de hierbas.</p>
+                                <div class="allergen-icons">
+                                    <img src="./../../img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
+                                </div>
+                            </div>
+                            <div class="item-image-wrapper">
+                                <img src="./../../img/menu1/menu15.png" alt="Patatas asadas" class="item-image">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                <section class="section-alérgenos">
+            <div class="header-alérgenos">
+                <h2>Información de Alérgenos</h2>
+            </div>
+
+            <div class="grid-alérgenos">
+                <article class="card-alérgeno">
+                    <img src="./../../img/alergenos/sulfitos.png" alt="Logo Sulfitos" class="logo-alérgeno">
+                    <div class="info-alérgeno">
+                        <h3>Sulfitos</h3>
+                        <p>Presentes comúnmente en vinos, vinagres y productos conservados. Crucial para personas con sensibilidad asmática.</p>
+                    </div>
+                </article>
+
+                <article class="card-alérgeno">
+                    <img src="./../../img/alergenos/gluten.png" alt="Logo Gluten" class="logo-alérgeno">
+                    <div class="info-alérgeno">
+                        <h3>Gluten</h3>
+                        <p>Cereales como trigo, cebada y centeno. Incluye harinas y espesantes utilizados en salsas tradicionales.</p>
+                    </div>
+                </article>
+
+                <article class="card-alérgeno">
+                    <img src="./../../img/alergenos/frutos.png" alt="Logo Frutos de cáscara" class="logo-alérgeno">
+                    <div class="info-alérgeno">
+                        <h3>Frutos de Cáscara</h3>
+                        <p>Incluye almendras, avellanas y nueces, utilizados en nuestros picados serranos y postres artesanales.</p>
+                    </div>
+                </article>
+
+                <article class="card-alérgeno">
+                    <img src="./../../img/alergenos/lacteos.png" alt="Logo Lácteos" class="logo-alérgeno">
+                    <div class="info-alérgeno">
+                        <h3>Lácteos</h3>
+                        <p>Presente en nuestras mantequillas de hierbas, purés cremosos y elaboraciones con leche de cabra.</p>
+                    </div>
+                </article>
+
+                <article class="card-alérgeno">
+                    <img src="./../../img/alergenos/pescado.png" alt="Logo Pescado" class="logo-alérgeno">
+                    <div class="info-alérgeno">
+                        <h3>Pescado</h3>
+                        <p>Presente en nuestras truchas de río y en algunos fondos marinos utilizados para potenciar caldos y salsas.</p>
+                    </div>
+                </article>
+
+                <article class="card-alérgeno">
+                    <img src="./../../img/alergenos/huevos.png" alt="Logo Huevo" class="logo-alérgeno">
+                    <div class="info-alérgeno">
+                        <h3>Huevo</h3>
+                        <p>Utilizado principalmente en el rebozado artesanal de nuestras croquetas y en la emulsión de salsas frescas.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contacto">
+        <div class="footer-grid">
+            <div>
+                <h2 style="font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 1rem;">Sabor A Monte</h2>
+                <p>Respeto, Sabor y Sierra.</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Ubicación</h4>
+                <p>Calle del Roble, 12</p>
+                <p>Sierra Norte, Madrid</p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1rem;">Reservas</h4>
+                <p>+34 600 000 000</p>
+                <p>hola@saboramonte.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cursor personalizado
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Menú Toggle
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.getElementById('menuToggle').classList.toggle('active');
+            document.body.style.overflow = document.body.style.overflow === 'hidden' ? 'auto' : 'hidden';
+        }
+
+        // Animación de Reveal al hacer Scroll
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
