@@ -334,6 +334,14 @@
         font-size: 1.1rem;
         margin-top: 0.3rem;
     }
+
+    .item-info {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        color: #555;
+        font-size: 0.8rem;
+        margin-top: 0.3rem;
+    }
 /* --- Estilos Carta Editorial (Ajustes para imagen y alérgenos) --- */
 
 .menu-item {
@@ -502,6 +510,10 @@
             grid-template-columns: 1fr;
         }
     }
+
+    .allergen-icons, .item-description, .item-image-wrapper {
+        display: none;
+    }
     </style>
 </head>
 <body>
@@ -531,13 +543,19 @@
             </div>
 
             <div class="menu-container">
+                <div>
+                    <p class="item-info">¹ Con pan y agua incluidos.</p>
+                    <p class="item-info">² Para una información detallada sobre alérgenos y composición de nuestros platos, por favor, consulte con nuestro personal de sala.</p>
+                    <br>
+                </div>
+
                 <div class="menu-category">
-                    <h3 class="category-title">Entrantes</h3>
+                    <h3 class="category-title">Primeros</h3>
                     
                     <div class="menu-item">
                         <div class="item-content">
                             <div class="item-header">
-                                <span class="item-name">Crema tibia de calabaza y puerro</span>
+                                <span class="item-name">Ensalada de la huerta</span>
                                 <span class="item-dots"></span>
                                 <span class="item-price">14€</span>
                             </div>
@@ -555,7 +573,7 @@
                     <div class="menu-item">
                         <div class="item-content">
                             <div class="item-header">
-                                <span class="item-name">Ensalada de queso de cabra templado</span>
+                                <span class="item-name">Crema del día</span>
                                 <span class="item-dots"></span>
                                 <span class="item-price">16€</span>
                             </div>
@@ -573,7 +591,7 @@
                     <div class="menu-item">
                         <div class="item-content">
                             <div class="item-header">
-                                <span class="item-name">Trucha curada en cítricos</span>
+                                <span class="item-name">Pasta del día</span>
                                 <span class="item-dots"></span>
                                 <span class="item-price">18€</span>
                             </div>
@@ -590,7 +608,7 @@
                     <div class="menu-item">
                         <div class="item-content">
                             <div class="item-header">
-                                <span class="item-name">Champiñones rellenos de temporada</span>
+                                <span class="item-name">Arroz del día</span>
                                 <span class="item-dots"></span>
                                 <span class="item-price">15€</span>
                             </div>
@@ -602,33 +620,15 @@
                             <img src="./../../img/menu1/menu4.png" alt="Champiñones rellenos" class="item-image">
                         </div>
                     </div>
-
-                    <div class="menu-item">
-                        <div class="item-content">
-                            <div class="item-header">
-                                <span class="item-name">Croquetas cremosas de boletus</span>
-                                <span class="item-dots"></span>
-                                <span class="item-price">14€</span>
-                            </div>
-                            <p class="item-description">Con base de cebolla caramelizada y una textura fundente incomparable.</p>
-                            <div class="allergen-icons">
-                                <img src="./../../img/alergenos/gluten.png" alt="Gluten" title="Gluten">
-                                <img src="./../../img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
-                            </div>
-                        </div>
-                        <div class="item-image-wrapper">
-                            <img src="./../../img/menu1/menu5.png" alt="Croquetas de boletus" class="item-image">
-                        </div>
-                    </div>
                 </div>
 
                 <div class="menu-category">
-                    <h3 class="category-title">Platos Principales</h3>
+                    <h3 class="category-title">Segundos</h3>
                     
                     <div class="menu-item special">
                         <div class="item-content">
                             <div class="item-header">
-                                <span class="item-name">Cordero lechal al horno</span>
+                                <span class="item-name">Guiso de ternera con setas</span>
                                 <span class="item-dots"></span>
                                 <span class="item-price">54€</span>
                             </div>
@@ -645,7 +645,7 @@
                     <div class="menu-item">
                         <div class="item-content">
                             <div class="item-header">
-                                <span class="item-name">Trucha a la parrilla</span>
+                                <span class="item-name">Trucas al horno con patats asadas</span>
                                 <span class="item-dots"></span>
                                 <span class="item-price">21€</span>
                             </div>
@@ -663,7 +663,7 @@
                     <div class="menu-item">
                         <div class="item-content">
                             <div class="item-header">
-                                <span class="item-name">Lomo alto a la brasa</span>
+                                <span class="item-name">Chuletas de cerdo con arroz basmati</span>
                                 <span class="item-dots"></span>
                                 <span class="item-price">26€</span>
                             </div>
@@ -679,7 +679,7 @@
                     <div class="menu-item">
                         <div class="item-content">
                             <div class="item-header">
-                                <span class="item-name">Ciervo guisado al estilo serrano</span>
+                                <span class="item-name">Tiras de pollo con patatas fritas</span>
                                 <span class="item-dots"></span>
                                 <span class="item-price">24€</span>
                             </div>
@@ -691,49 +691,15 @@
                             <img src="./../../img/menu1/menu9.png" alt="Ciervo guisado" class="item-image">
                         </div>
                     </div>
-
-                    <div class="menu-item special">
-                        <div class="item-content">
-                            <div class="item-header">
-                                <span class="item-name">Cabrito al horno clásico</span>
-                                <span class="item-dots"></span>
-                                <span class="item-price">52€</span>
-                            </div>
-                            <p class="item-description">Receta ancestral de la sierra. (Mínimo 2 personas, por encargo).</p>
-                            <div class="allergen-icons">
-                                <img src="./../../img/alergenos/lacteos.png" alt="Lácteos" title="Lácteos">
-                            </div>
-                        </div>
-                        <div class="item-image-wrapper">
-                            <img src="./../../img/menu1/menu10.png" alt="Cabrito al horno" class="item-image">
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <div class="item-content">
-                            <div class="item-header">
-                                <span class="item-name">Codorniz estofada</span>
-                                <span class="item-dots"></span>
-                                <span class="item-price">22€</span>
-                            </div>
-                            <p class="item-description">Cocción lenta en fondo aromático profundo. (Según temporada).</p>
-                            <div class="allergen-icons">
-                                <img src="./../../img/alergenos/sulfitos.png" alt="Sulfitos" title="Sulfitos">
-                            </div>
-                        </div>
-                        <div class="item-image-wrapper">
-                            <img src="./../../img/menu1/menu11.png" alt="Codorniz estofada" class="item-image">
-                        </div>
-                    </div>
                 </div>
 
                 <div class="menu-category">
-                    <h3 class="category-title">Guarniciones</h3>
+                    <h3 class="category-title">Postres</h3>
                     <div class="guarniciones-grid">
                         <div class="menu-item">
                             <div class="item-content">
                                 <div class="item-header">
-                                    <span class="item-name">ENSALADA DE LA HUERTA</span>
+                                    <span class="item-name">Flan de queso</span>
                                     <span class="item-dots"></span>
                                     <span class="item-price">14€</span>
                                 </div>
@@ -750,7 +716,7 @@
                         <div class="menu-item">
                             <div class="item-content">
                                 <div class="item-header">
-                                    <span class="item-name">ENSALADA DE QUINOA</span>
+                                    <span class="item-name">Fruta de temporada</span>
                                     <span class="item-dots"></span>
                                     <span class="item-price">14€</span>
                                 </div>
@@ -767,7 +733,7 @@
                         <div class="menu-item">
                             <div class="item-content">
                                 <div class="item-header">
-                                    <span class="item-name">PURÉ DE CASTAÑAS</span>
+                                    <span class="item-name">Tarta del día</span>
                                     <span class="item-dots"></span>
                                     <span class="item-price">14€</span>
                                 </div>
@@ -784,7 +750,7 @@
                         <div class="menu-item">
                             <div class="item-content">
                                 <div class="item-header">
-                                    <span class="item-name">Patatas asadas</span>
+                                    <span class="item-name">Sorbete de fruta de la pasión y lima</span>
                                     <span class="item-dots"></span>
                                     <span class="item-price">14€</span>
                                 </div>
@@ -797,7 +763,6 @@
                                 <img src="./../../img/menu1/menu15.png" alt="Patatas asadas" class="item-image">
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -864,7 +829,7 @@
         <div class="footer-grid">
             <div>
                 <h2 style="font-family: 'Playfair Display'; font-size: 3rem; margin-bottom: 1rem;">Sabor A Monte</h2>
-                <p>Respeto, Sabor y Sierra.</p>
+                <p>Sostenibilidad, Sabor y Sierra.</p>
             </div>
             <div>
                 <h4 style="margin-bottom: 1rem;">Ubicación</h4>
